@@ -1,17 +1,18 @@
-﻿namespace ElementalTactics
+﻿using System.Windows.Media;
+
+namespace ElementalTactics
 {
-    class Character
+    public class Character
     {
-        public Character(int health, int mana, int experience)
-        {
-            Health = health;
-            Mana = mana;
-            Experience = experience;
-        }
-
-        private int Health { get; set; }
-        private int Mana { get; set; }
-        private int Experience { get; set; }
-
+        public string Name { get; set; }
+        public int MaxHealth { get; set; }
+        public int CurrentHealth { get; set; }
+        public int Mana { get; set; }
+        public int Experience { get; set; }
+        public int Attack { get; set; }
+        public int Defense { get; set; }
+        public int Level { get; set; }
+        public Position Position { get; set; }
+        public ImageSource ImageSource { get; set; }
     }
 }
