@@ -1,24 +1,45 @@
-﻿using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
+﻿using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ElementalTactics
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
+        public bool gameRunning { get; set; }
+        public GameState gameState { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private async void Window_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            e.Handled = true;
+
+            if (Overlay.Visibility == Visibility.Visible)
+            {
+                e.Handled = true;
+            }
+            if (!gameRunning)
+            {
+                gameRunning = true;
+                Overlay.Visibility = Visibility.Hidden;
+                await RunGame();
+                gameRunning = false;
+            }
+        }
+        private async Task RunGame()
+        {
+            gameState = new GameState();
+            await GameLoop();
+        }
+        private async Task GameLoop()
+        {
+            while (!gameState.GameOver)
+            {
+                await Task.Delay(100);
+            }
         }
     }
 }

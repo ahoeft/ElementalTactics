@@ -5,8 +5,51 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ElementalTactics"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        MinWidth="300" MinHeight="300"
+        Title="Elemental Tactics" Height="500" Width="800"
+        Background="{StaticResource BackgroundColor}"
+        Foreground="{StaticResource TextColor}"
+        FontFamily="{StaticResource MainFont}"
+        WindowStartupLocation="CenterScreen"
+        PreviewKeyDown="Window_PreviewKeyDown">
+    <Viewbox>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
 
-    </Grid>
+            <Border x:Name="Gridborder"
+        Grid.Row="1"
+        BorderBrush="{StaticResource GridLineColor}"
+        BorderThickness="1.5"
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"
+        RenderOptions.EdgeMode="Aliased"
+        Margin="20,0,20,20">
+                <UniformGrid x:Name="GameGrid"
+                 Width="400"
+                 Height="400"
+                 Background="{StaticResource GridBackgroundColor}"
+                 SnapsToDevicePixels="True"
+                 RenderOptions.BitmapScalingMode="HighQuality"></UniformGrid>
+            </Border>
+
+            <Border x:Name="Overlay"
+                Grid.Row="1"
+                Background="{StaticResource OverlayColor}"
+                Width="{Binding Path=ActualWidth, ElementName=Gridborder}"
+                Height="{Binding Path=ActualHeight, ElementName=Gridborder}"
+                Margin="{Binding Path=Margin, ElementName=Gridborder}"
+                RenderOptions.EdgeMode="Aliased">
+                <TextBlock x:Name="OverlayText"
+                       Text="PRESS ANY KEY TO START"
+                       FontSize="26"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       TextWrapping="Wrap"/>
+
+            </Border>
+        </Grid>
+    </Viewbox>
 </Window>
